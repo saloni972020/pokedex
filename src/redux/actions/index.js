@@ -1,17 +1,25 @@
 /* eslint-disable import/prefer-default-export */
-import axios from 'axios';
-import { GET_POKEMONS, GET_POKEMON, CHANGE_FILTER } from '../constants/actionTypes';
+import axios from "axios";
+import {
+  GET_POKEMONS,
+  GET_POKEMON,
+  CHANGE_FILTER,
+} from "../constants/actionTypes";
 
-export const getPokemons = () => async dispatch => {
+export const getPokemons = (url) => async (dispatch) => {
   try {
-    const allPokemon = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=100');
-    const pokemonData = await Promise.all(allPokemon.data.results.map(async pokemon => {
-      const pokemonRecord = await axios.get(pokemon.url);
-      return pokemonRecord.data;
-    }));
+    const allPokemon = await axios.get(url);
+    const pokemonData = await Promise.all(
+      allPokemon.data.results.map(async (pokemon) => {
+        const pokemonRecord = await axios.get(pokemon.url);
+        return pokemonRecord.data;
+      })
+    );
     dispatch({
       type: GET_POKEMONS,
       payload: pokemonData,
+      next: allPokemon.data.next,
+      previous: allPokemon.data.previous,
     });
   } catch (err) {
     dispatch({
@@ -20,7 +28,7 @@ export const getPokemons = () => async dispatch => {
   }
 };
 
-export const getPokemon = id => async dispatch => {
+export const getPokemon = (id) => async (dispatch) => {
   try {
     const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
     dispatch({
@@ -34,7 +42,7 @@ export const getPokemon = id => async dispatch => {
   }
 };
 
-export const changeFilter = filter => ({
+export const changeFilter = (filter) => ({
   type: CHANGE_FILTER,
   filter,
 });

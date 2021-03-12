@@ -1,21 +1,41 @@
 /* eslint-disable react/forbid-prop-types */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getPokemons, changeFilter } from "../redux/actions";
 import Pokemon from "../components/Pokemon";
 import CategoryFilter from "../components/CategoryFilter";
+import Pagination from "../components/Pagination";
 
-const PokemonList = ({ getPokemons, pokemons, changeFilter, filter }) => {
+const PokemonList = ({
+  getPokemons,
+  pokemons,
+  changeFilter,
+  filter,
+  next,
+  previous,
+}) => {
+  const [currentPageUrl, setCurrentPageUrl] = useState(
+    "https://pokeapi.co/api/v2/pokemon"
+  );
+
   useEffect(() => {
-    getPokemons();
+    getPokemons(currentPageUrl);
     // eslint-disable-next-line
-  }, []);
+  }, [currentPageUrl]);
 
   const handleFilterChange = (e) => {
     const { value } = e.target;
     changeFilter(value);
   };
+
+  function gotoNextPage() {
+    setCurrentPageUrl(next);
+  }
+
+  function gotoPrevPage() {
+    setCurrentPageUrl(previous);
+  }
 
   const filteredPokemons = () =>
     filter === "ALL"
@@ -28,6 +48,7 @@ const PokemonList = ({ getPokemons, pokemons, changeFilter, filter }) => {
           }
           return false;
         });
+  console.log({ pokemons }, { next }, { previous });
 
   return pokemons === null ? (
     <h1>Loading....</h1>
@@ -39,6 +60,10 @@ const PokemonList = ({ getPokemons, pokemons, changeFilter, filter }) => {
           <Pokemon key={pokemon.id} pokemon={pokemon} />
         ))}
       </div>
+      <Pagination
+        gotoNextPage={next ? gotoNextPage : null}
+        gotoPrevPage={previous ? gotoPrevPage : null}
+      />
     </div>
   );
 };
@@ -53,6 +78,8 @@ PokemonList.propTypes = {
 const mapStateToProps = (state) => ({
   pokemons: state.pokemon.pokemons,
   filter: state.filter,
+  next: state.pokemon.next,
+  previous: state.pokemon.previous,
 });
 
 export default connect(mapStateToProps, { getPokemons, changeFilter })(
