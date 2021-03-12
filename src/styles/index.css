@@ -1,0 +1,7 @@
+a {
+  text-decoration: none;
+}
+.pokemon-listing {
+  display: flex;
+  flex-wrap: wrap;
+}
