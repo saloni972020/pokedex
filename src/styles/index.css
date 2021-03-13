@@ -13,6 +13,7 @@ a {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
 }
 .card {
   margin: 5px 10px;
