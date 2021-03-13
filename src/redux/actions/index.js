@@ -8,9 +8,8 @@ import {
   POKEMONS_RESET,
 } from "../constants/actionTypes";
 
-export const getPokemons = (offset) => async (dispatch) => {
+export const getPokemons = (offset = 0) => async (dispatch) => {
   try {
-    console.log(offset, "check");
     const allPokemon = await axios.get(
       `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=20`
     );
@@ -44,7 +43,6 @@ export const getCount = () => (dispatch) =>
 
 export const getPokemon = (id) => async (dispatch) => {
   try {
-    console.log("check in single");
     const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
     dispatch({
       type: GET_POKEMON,
@@ -56,8 +54,8 @@ export const getPokemon = (id) => async (dispatch) => {
     });
   }
 };
-export const getResetPokemon = () => (dispatch) => {
-  dispatch({
+export const getResetPokemon = () => async (dispatch) => {
+  await dispatch({
     type: POKEMONS_RESET,
   });
 };

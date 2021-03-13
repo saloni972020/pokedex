@@ -50,3 +50,112 @@ button {
   font: 20px "Patua One", sans-serif;
   color: #17a7d2;
 }
+.pokewidget {
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  padding: 40px 50px;
+  max-width: 500px;
+  box-shadow: 2px 5px 15px rgba(50, 50, 50, 0.5);
+  margin-bottom: 10px;
+}
+
+.pokewidget-name {
+  text-transform: capitalize;
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+.pokewidget-type {
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-top: 10px;
+  margin-right: 5px;
+  color: rgb(148, 158, 168);
+}
+
+.pokewidget-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 250px;
+  transform: translate(0%, -35%);
+}
+
+.pokewidget-characteristics {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.pokewidget-characteristic {
+  height: 100%;
+  text-transform: capitalize;
+  text-align: left;
+}
+
+.pokewidget-characteristic-name {
+  /* to be changed with type color */
+  color: black;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.pokewidget-characteristic-value {
+  margin-top: 10px;
+  color: rgb(88, 88, 88);
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.pokewidget-description {
+  color: rgb(162, 162, 162);
+  margin-top: 30px;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+}
+
+.pokewidget-stat-container {
+  margin-top: 10px;
+}
+
+.pokewidget-stat-values,
+.pokewidget-stat-names {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.pokewidget-stat-values {
+  height: 170px;
+  align-items: flex-end;
+}
+
+.pokewidget-stat-value,
+.pokewidget-stat-name {
+  width: 10%;
+}
+
+.pokewidget-stat-value {
+  width: 10%;
+  height: 0%;
+  border-radius: 5px;
+  /* to be changed with type color */
+  background-color: black;
+  transition: height 1s ease;
+}
+
+.pokewidget-stat-name {
+  margin-top: 10px;
+  color: rgb(88, 88, 88);
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 500;
+}

@@ -16,11 +16,12 @@ const PokemonList = ({
   next,
   previous,
   count,
+  getResetPokemon,
 }) => {
   const [currentPageNumber, setCurrentPageNumber] = useState("1");
 
   useEffect(() => {
-    const offset = Math.min(currentPageNumber * 20, count);
+    const offset = Math.min(currentPageNumber * 20 - 20, count);
     getPokemons(offset);
     // eslint-disable-next-line
   }, [currentPageNumber]);
@@ -36,7 +37,6 @@ const PokemonList = ({
           }
           return false;
         });
-  console.log({ pokemons }, { next }, { previous });
   const paginate = (pageNumber) => setCurrentPageNumber(pageNumber);
 
   return pokemons === null ? (
@@ -69,6 +69,8 @@ const mapStateToProps = (state) => ({
   previous: state.pokemon.previous,
 });
 
-export default connect(mapStateToProps, { getPokemons, changeFilter })(
-  PokemonList
-);
+export default connect(mapStateToProps, {
+  getPokemons,
+  getResetPokemon,
+  changeFilter,
+})(PokemonList);

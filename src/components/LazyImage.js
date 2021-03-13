@@ -4,12 +4,10 @@ import Shimmer from "./Shimmer";
 const LazyImage = (imageProps) => {
   const [shouldLoad, setShouldLoad] = useState(false);
   const placeholderRef = useRef(null);
-  console.log({ imageProps });
 
   useEffect(() => {
     if (!shouldLoad && placeholderRef.current) {
       const observer = new IntersectionObserver(([{ intersectionRatio }]) => {
-        console.log({ intersectionRatio }, imageProps, "in image");
         if (intersectionRatio > 0 || (imageProps && imageProps.src)) {
           setShouldLoad(true);
         }

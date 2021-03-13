@@ -5,7 +5,7 @@ const Pagination = ({ limit = 20, count, paginate }) => {
   const [activePage, setActivePage] = useState("1");
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.floor(count / limit); i++) {
+  for (let i = 1; i <= Math.ceil(count / limit); i++) {
     pageNumbers.push(i);
   }
 

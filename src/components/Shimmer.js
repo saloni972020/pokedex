@@ -6,10 +6,22 @@ const Shimmer = ({ type }) => {
         switch (type) {
           case "card":
             return (
-              <div className="card shimmerCard">
-                <div className="animate box"></div>
-                <div className="animate lines"></div>
-              </div>
+              <>
+                <div className=" details-loading ">
+                  <div className="animate box-lg"></div>
+                  <div className="flex-2">
+                    <div className="animate lines "></div>
+                    <div className="animate lines "></div>
+                    <div className="animate lines "></div>
+                    <div className="animate lines "></div>
+                    <div className="animate lines "></div>
+                    <div className="animate lines "></div>
+                    <div className="animate lines "></div>
+                    <div className="animate lines "></div>
+                  </div>
+                </div>
+                <div className="animate photo"></div>
+              </>
             );
           case "img":
             return <div className="animate photo"></div>;

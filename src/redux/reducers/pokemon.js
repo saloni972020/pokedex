@@ -8,10 +8,12 @@ const initialState = {
   pokemons: [],
   pokemon: {},
   loading: true,
+  count: 0,
+  next: null,
+  previous: null,
 };
 
 export default function (state = initialState, action) {
-  console.log(action);
   switch (action.type) {
     case GET_POKEMONS:
       return {
@@ -29,7 +31,13 @@ export default function (state = initialState, action) {
         loading: false,
       };
     case POKEMONS_RESET:
-      return initialState;
+      return {
+        pokemons: [],
+        loading: true,
+        next: "",
+        previous: "",
+        count: 0,
+      };
     default:
       return state;
   }
