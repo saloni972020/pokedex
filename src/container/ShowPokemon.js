@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getPokemon } from "../redux/actions";
+import { getPokemon, getResetPokemon } from "../redux/actions";
 import "../styles/ShowPokemon.css";
 
 const ShowPokemon = ({ pokemon: { pokemon, loading }, getPokemon, match }) => {
@@ -12,9 +12,13 @@ const ShowPokemon = ({ pokemon: { pokemon, loading }, getPokemon, match }) => {
   useEffect(() => {
     const { id } = match.params;
     getPokemon(id);
-    if (!loading && pokemon) SetImageUrl(pokemon.sprites.front_default);
+    return () => getResetPokemon();
+  }, []);
+  useEffect(() => {
+    console.log("i am called", pokemon, loading);
+    if (pokemon && pokemon.sprites) SetImageUrl(pokemon.sprites.front_default);
     // eslint-disable-next-line;
-  }, [loading]);
+  }, [pokemon]);
 
   return pokemon && loading === null ? (
     <h1>loading...</h1>
@@ -22,7 +26,7 @@ const ShowPokemon = ({ pokemon: { pokemon, loading }, getPokemon, match }) => {
     <div className="row">
       <div className="col-md-6 poke-img">
         <h2>{pokemon.name}</h2>
-        {pokemon && <img src={imageUrl} alt="img" style={{ width: "25rem" }} />}
+        <img src={imageUrl} alt="img" style={{ width: "25rem" }} />
       </div>
       <div className="col-md-6 card poke-card" style={{ width: "35rem" }}>
         <div className="height">
@@ -80,10 +84,13 @@ const ShowPokemon = ({ pokemon: { pokemon, loading }, getPokemon, match }) => {
 ShowPokemon.propTypes = {
   pokemon: PropTypes.shape({}).isRequired,
   getPokemon: PropTypes.func.isRequired,
+  getResetPokemon: PropTypes.func.isRequired,
 };
 
 const mapStateToProp = (state) => ({
   pokemon: state.pokemon,
 });
 
-export default connect(mapStateToProp, { getPokemon })(ShowPokemon);
+export default connect(mapStateToProp, { getPokemon, getResetPokemon })(
+  ShowPokemon
+);

@@ -4,6 +4,8 @@ import {
   GET_POKEMONS,
   GET_POKEMON,
   CHANGE_FILTER,
+  TOTAL_COUNT,
+  GET_POKEMON_RESET,
 } from "../constants/actionTypes";
 
 export const getPokemons = (url) => async (dispatch) => {
@@ -20,6 +22,7 @@ export const getPokemons = (url) => async (dispatch) => {
       payload: pokemonData,
       next: allPokemon.data.next,
       previous: allPokemon.data.previous,
+      count: allPokemon.data.count,
     });
   } catch (err) {
     dispatch({
@@ -27,6 +30,14 @@ export const getPokemons = (url) => async (dispatch) => {
     });
   }
 };
+const getTotalCount = (count) => (dispatch) => {
+  dispatch({ type: TOTAL_COUNT, payload: count });
+};
+
+export const getCount = () => (dispatch) =>
+  axios
+    .get(`https://pokeapi.co/api/v2/pokemon`)
+    .then((data) => dispatch(getTotalCount(data.data.count)));
 
 export const getPokemon = (id) => async (dispatch) => {
   try {
@@ -41,7 +52,11 @@ export const getPokemon = (id) => async (dispatch) => {
     });
   }
 };
-
+export const getResetPokemon = () => (dispatch) => {
+  dispatch({
+    type: GET_POKEMON_RESET,
+  });
+};
 export const changeFilter = (filter) => ({
   type: CHANGE_FILTER,
   filter,

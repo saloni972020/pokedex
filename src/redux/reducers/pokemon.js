@@ -1,4 +1,8 @@
-import { GET_POKEMONS, GET_POKEMON } from "../constants/actionTypes";
+import {
+  GET_POKEMONS,
+  GET_POKEMON,
+  GET_POKEMON_RESET,
+} from "../constants/actionTypes";
 
 const initialState = {
   pokemons: [],
@@ -7,6 +11,7 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
+  console.log(action);
   switch (action.type) {
     case GET_POKEMONS:
       return {
@@ -15,6 +20,7 @@ export default function (state = initialState, action) {
         loading: false,
         next: action.next,
         previous: action.previous,
+        count: action.count,
       };
     case GET_POKEMON:
       return {
@@ -22,6 +28,8 @@ export default function (state = initialState, action) {
         pokemon: action.payload,
         loading: false,
       };
+    case GET_POKEMON_RESET:
+      return initialState;
     default:
       return state;
   }

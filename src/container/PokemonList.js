@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getPokemons, changeFilter } from "../redux/actions";
+import { getPokemons, changeFilter, getResetPokemon } from "../redux/actions";
 import Pokemon from "../components/Pokemon";
 import CategoryFilter from "../components/CategoryFilter";
 import Pagination from "../components/Pagination";
