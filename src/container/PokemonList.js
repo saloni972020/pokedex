@@ -52,7 +52,6 @@ const PokemonList = ({
         <Shimmer type="list"></Shimmer>
       ) : (
         <div>
-          <CategoryFilter handleChange={handleFilterChange} />
           <div className="pokemon-listing">
             {filteredPokemons().map((pokemon) => (
               <Pokemon key={pokemon.id} pokemon={pokemon} />

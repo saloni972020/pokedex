@@ -8,30 +8,80 @@
   margin-left: auto;
 }
 
-@media (min-width: 576px) {
+@media (max-width: 576px) {
   .wrapper-sm,
   .wrapper {
     max-width: 540px;
+  }
+  .poke-img {
+    width: 100%;
+  }
+  #ribbon {
+    width: -webkit-fill-available;
+    overflow: hidden;
+  }
+  .centralised-card img {
+    width: 100%;
+  }
+  .pokewidget {
+    max-width: 500px;
+    flex-wrap: wrap;
+    overflow: hidden;
+  }
+  .pokewidget-stat-name {
+    font-size: 10px;
   }
 }
 @media (min-width: 768px) {
   .wrapper {
     max-width: 720px;
   }
+  .pokewidget {
+    max-width: 680px;
+    flex-wrap: wrap;
+    overflow: hidden;
+  }
+  .pokewidget-stat-name {
+    font-size: 15px;
+  }
 }
 @media (min-width: 992px) {
   .wrapper {
     max-width: 960px;
+  }
+  .pokewidget {
+    max-width: 920px;
+    flex-wrap: wrap;
+    overflow: hidden;
+  }
+  .pokewidget-stat-name {
+    font-size: 20px;
   }
 }
 @media (min-width: 1200px) {
   .wrapper {
     max-width: 1140px;
   }
+  .pokewidget {
+    max-width: 1100;
+    flex-wrap: wrap;
+    overflow: hidden;
+  }
+  .pokewidget-stat-name {
+    font-size: 20px;
+  }
 }
 @media (min-width: 1400px) {
   .wrapper {
     max-width: 1320px;
+  }
+  .pokewidget {
+    max-width: 1280px;
+    flex-wrap: wrap;
+    overflow: hidden;
+  }
+  .pokewidget-stat-name {
+    font-size: 20px;
   }
 }
 

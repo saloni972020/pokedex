@@ -1,6 +1,5 @@
 import "../styles/ErrorPage.css";
 const ErrorPage = ({ err }) => {
-  console.log(err, "err", typeof err);
   return (
     <div>
       <div className="wrapper">
