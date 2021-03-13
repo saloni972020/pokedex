@@ -6,6 +6,7 @@ import {
   CHANGE_FILTER,
   TOTAL_COUNT,
   POKEMONS_RESET,
+  POKEMONS_ERR,
 } from "../constants/actionTypes";
 
 export const getPokemons = (offset = 0) => async (dispatch) => {
@@ -14,7 +15,7 @@ export const getPokemons = (offset = 0) => async (dispatch) => {
       `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=20`
     );
     const pokemonData = await Promise.all(
-      allPokemon.data.results.map(async (pokemon) => {
+      await allPokemon.data.results.map(async (pokemon) => {
         const pokemonRecord = await axios.get(pokemon.url);
         return pokemonRecord.data;
       })
@@ -28,7 +29,8 @@ export const getPokemons = (offset = 0) => async (dispatch) => {
     });
   } catch (err) {
     dispatch({
-      err,
+      type: POKEMONS_ERR,
+      payload: err,
     });
   }
 };
@@ -50,7 +52,8 @@ export const getPokemon = (id) => async (dispatch) => {
     });
   } catch (err) {
     dispatch({
-      err,
+      type: POKEMONS_ERR,
+      payload: err,
     });
   }
 };

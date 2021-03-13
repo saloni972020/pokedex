@@ -22,6 +22,7 @@ const PokemonList = ({
 
   useEffect(() => {
     const offset = Math.min(currentPageNumber * 20 - 20, count);
+    getResetPokemon();
     getPokemons(offset);
     // eslint-disable-next-line
   }, [currentPageNumber]);

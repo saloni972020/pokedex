@@ -10,6 +10,7 @@ import Ribbon from "../components/ribbon";
 import { typeToColorHex } from "../redux/constants/types";
 import Pokemon from "../components/Pokemon";
 import Shimmer from "../components/Shimmer";
+import ErrorPage from "../components/ErrorPage";
 
 const ShowPokemon = ({
   pokemon,
@@ -17,6 +18,8 @@ const ShowPokemon = ({
   getPokemon,
   match,
   getResetPokemon,
+  isErr,
+  err,
 }) => {
   const [imageUrl, SetImageUrl] = useState("");
   const [pokeCardStyle, setPokeCardStyle] = useState("#A33EA1");
@@ -37,6 +40,7 @@ const ShowPokemon = ({
     // eslint-disable-next-line;
   }, [pokemon]);
   if (!pokemon || loading) return <Shimmer type="card"></Shimmer>;
+  else if (isErr) return <ErrorPage err={err}></ErrorPage>;
   else
     return (
       <div className="inline-display">
@@ -124,30 +128,6 @@ const ShowPokemon = ({
                     ></div>
                   ))
                 : null}
-              {/* <div
-                class="pokewidget-stat-value"
-                style={{ height: "32.5%", backgroundColor: `${pokeCardStyle}` }}
-              ></div>
-              <div
-                class="pokewidget-stat-value"
-                style={{ height: "32.5%", backgroundColor: `${pokeCardStyle}` }}
-              ></div>
-              <div
-                class="pokewidget-stat-value"
-                style={{ height: "32.5%", backgroundColor: `${pokeCardStyle}` }}
-              ></div>
-              <div
-                class="pokewidget-stat-value"
-                style={{ height: "32.5%", backgroundColor: `${pokeCardStyle}` }}
-              ></div>
-              <div
-                class="pokewidget-stat-value"
-                style={{ height: "32.5%", backgroundColor: `${pokeCardStyle}` }}
-              ></div>
-              <div
-                class="pokewidget-stat-value"
-                style={{ height: "32.5%", backgroundColor: `${pokeCardStyle}` }}
-              ></div> */}
             </div>
             <div class="pokewidget-stat-names">
               {pokemon && pokemon.stats
@@ -195,6 +175,8 @@ ShowPokemon.propTypes = {
 const mapStateToProp = (state) => ({
   pokemon: state.pokemon.pokemon,
   loading: state.pokemon.loading,
+  isErr: state.pokemon.isErr,
+  err: state.pokemon.err,
 });
 
 export default connect(mapStateToProp, { getPokemon, getResetPokemon })(
