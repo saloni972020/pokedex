@@ -17,14 +17,20 @@ const PokemonList = ({
   previous,
   count,
   getResetPokemon,
+  loading,
 }) => {
   const [currentPageNumber, setCurrentPageNumber] = useState("1");
-
   useEffect(() => {
     const offset = Math.min(currentPageNumber * 20 - 20, count);
     getPokemons(offset);
+
     // eslint-disable-next-line
   }, [currentPageNumber]);
+
+  const handleFilterChange = (e) => {
+    const { value } = e.target;
+    changeFilter(value);
+  };
 
   const filteredPokemons = () =>
     filter === "ALL"
@@ -39,18 +45,23 @@ const PokemonList = ({
         });
   const paginate = (pageNumber) => setCurrentPageNumber(pageNumber);
 
-  return pokemons === null ? (
-    <Shimmer type="list"></Shimmer>
-  ) : (
-    <div>
-      {/* <CategoryFilter handleChange={handleFilterChange} /> */}
-      <div className="pokemon-listing">
-        {filteredPokemons().map((pokemon) => (
-          <Pokemon key={pokemon.id} pokemon={pokemon} />
-        ))}
-      </div>
-      <Pagination limit={20} count={count} paginate={paginate} />
-    </div>
+  return (
+    <>
+      {" "}
+      {pokemons === null || loading ? (
+        <Shimmer type="list"></Shimmer>
+      ) : (
+        <div>
+          <CategoryFilter handleChange={handleFilterChange} />
+          <div className="pokemon-listing">
+            {filteredPokemons().map((pokemon) => (
+              <Pokemon key={pokemon.id} pokemon={pokemon} />
+            ))}
+          </div>
+          <Pagination limit={20} count={count} paginate={paginate} />
+        </div>
+      )}
+    </>
   );
 };
 
@@ -67,6 +78,7 @@ const mapStateToProps = (state) => ({
   next: state.pokemon.next,
   count: state.pokemon.count,
   previous: state.pokemon.previous,
+  loading: state.pokemon.loading,
 });
 
 export default connect(mapStateToProps, {
