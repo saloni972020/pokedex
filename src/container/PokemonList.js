@@ -15,28 +15,15 @@ const PokemonList = ({
   filter,
   next,
   previous,
+  count,
 }) => {
-  const [currentPageUrl, setCurrentPageUrl] = useState(
-    "https://pokeapi.co/api/v2/pokemon"
-  );
+  const [currentPageNumber, setCurrentPageNumber] = useState("1");
 
   useEffect(() => {
-    getPokemons(currentPageUrl);
+    const offset = Math.min(currentPageNumber * 20, count);
+    getPokemons(offset);
     // eslint-disable-next-line
-  }, [currentPageUrl]);
-
-  const handleFilterChange = (e) => {
-    const { value } = e.target;
-    changeFilter(value);
-  };
-
-  function gotoNextPage() {
-    setCurrentPageUrl(next);
-  }
-
-  function gotoPrevPage() {
-    setCurrentPageUrl(previous);
-  }
+  }, [currentPageNumber]);
 
   const filteredPokemons = () =>
     filter === "ALL"
@@ -50,6 +37,7 @@ const PokemonList = ({
           return false;
         });
   console.log({ pokemons }, { next }, { previous });
+  const paginate = (pageNumber) => setCurrentPageNumber(pageNumber);
 
   return pokemons === null ? (
     <Shimmer type="list"></Shimmer>
@@ -61,10 +49,7 @@ const PokemonList = ({
           <Pokemon key={pokemon.id} pokemon={pokemon} />
         ))}
       </div>
-      <Pagination
-        gotoNextPage={next ? gotoNextPage : null}
-        gotoPrevPage={previous ? gotoPrevPage : null}
-      />
+      <Pagination limit={20} count={count} paginate={paginate} />
     </div>
   );
 };
@@ -80,6 +65,7 @@ const mapStateToProps = (state) => ({
   pokemons: state.pokemon.pokemons,
   filter: state.filter,
   next: state.pokemon.next,
+  count: state.pokemon.count,
   previous: state.pokemon.previous,
 });
 

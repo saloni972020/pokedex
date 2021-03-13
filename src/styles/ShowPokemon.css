@@ -17,25 +17,27 @@
 }
 
 .abilities span {
-  background-color: violet;
-  padding: 5px;
-  margin: 5px;
-  border-radius: 5px;
 }
 
 .types span {
-  background-color: rgb(128, 139, 236);
-  padding: 5px;
-  margin: 5px;
-  border-radius: 5px;
+}
+.details-card {
+  padding: 5px 10px;
 }
 
 .moves span {
-  background-color: rgb(236, 154, 181);
-  display: inline-flex;
-  padding: 5px;
-  margin: 5px;
+}
+
+.label {
+  display: inline-block;
+  color: white;
+  font-weight: 100;
+  font-size: 0.7em;
+  text-transform: capitalize;
+  padding: 0.5em 0.8em;
+  margin: 0.4em;
   border-radius: 5px;
+  background: #17a7d2;
 }
 
 button {
@@ -43,4 +45,8 @@ button {
   color: white;
   border-radius: 5px;
   margin-top: 20px;
+}
+.detail-header {
+  font: 20px "Patua One", sans-serif;
+  color: #17a7d2;
 }
