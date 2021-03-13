@@ -1,3 +1,9 @@
+.inline-display {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
 .poke-img h2 {
   color: yellow;
 }

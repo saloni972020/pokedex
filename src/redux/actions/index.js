@@ -5,7 +5,7 @@ import {
   GET_POKEMON,
   CHANGE_FILTER,
   TOTAL_COUNT,
-  GET_POKEMON_RESET,
+  POKEMONS_RESET,
 } from "../constants/actionTypes";
 
 export const getPokemons = (url) => async (dispatch) => {
@@ -54,7 +54,7 @@ export const getPokemon = (id) => async (dispatch) => {
 };
 export const getResetPokemon = () => (dispatch) => {
   dispatch({
-    type: GET_POKEMON_RESET,
+    type: POKEMONS_RESET,
   });
 };
 export const changeFilter = (filter) => ({

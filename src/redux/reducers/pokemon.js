@@ -1,7 +1,7 @@
 import {
   GET_POKEMONS,
   GET_POKEMON,
-  GET_POKEMON_RESET,
+  POKEMONS_RESET,
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -28,7 +28,7 @@ export default function (state = initialState, action) {
         pokemon: action.payload,
         loading: false,
       };
-    case GET_POKEMON_RESET:
+    case POKEMONS_RESET:
       return initialState;
     default:
       return state;

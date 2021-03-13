@@ -2,11 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "../styles/Pokemon.css";
+import LazyImage from "./LazyImage";
 
 const Pokemon = ({ pokemon }) => (
   <div className=" pokemon-card" style={{ width: "240px" }}>
     <Link className="pokeman-detail-link" to={`/${pokemon.id}`}>
-      <img
+      <LazyImage
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
         className="card-img-top"
         alt="images"

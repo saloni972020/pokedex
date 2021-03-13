@@ -6,6 +6,7 @@ import { getPokemons, changeFilter, getResetPokemon } from "../redux/actions";
 import Pokemon from "../components/Pokemon";
 import CategoryFilter from "../components/CategoryFilter";
 import Pagination from "../components/Pagination";
+import Shimmer from "../components/Shimmer";
 
 const PokemonList = ({
   getPokemons,
@@ -51,7 +52,7 @@ const PokemonList = ({
   console.log({ pokemons }, { next }, { previous });
 
   return pokemons === null ? (
-    <h1>Loading....</h1>
+    <Shimmer type="list"></Shimmer>
   ) : (
     <div>
       {/* <CategoryFilter handleChange={handleFilterChange} /> */}

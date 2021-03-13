@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getPokemon, getResetPokemon } from "../redux/actions";
 import "../styles/ShowPokemon.css";
+import LazyImage from "../components/LazyImage";
+import Ribbon from "../components/ribbon";
 
 const ShowPokemon = ({ pokemon: { pokemon, loading }, getPokemon, match }) => {
   const [imageUrl, SetImageUrl] = useState("");
@@ -12,7 +14,10 @@ const ShowPokemon = ({ pokemon: { pokemon, loading }, getPokemon, match }) => {
   useEffect(() => {
     const { id } = match.params;
     getPokemon(id);
-    return () => getResetPokemon();
+    return () => {
+      SetImageUrl("");
+      getResetPokemon();
+    };
   }, []);
   useEffect(() => {
     console.log("i am called", pokemon, loading);
@@ -23,12 +28,14 @@ const ShowPokemon = ({ pokemon: { pokemon, loading }, getPokemon, match }) => {
   return pokemon && loading === null ? (
     <h1>loading...</h1>
   ) : (
-    <div className="row">
-      <div className="col-md-6 poke-img">
-        <h2>{pokemon.name}</h2>
-        <img src={imageUrl} alt="img" style={{ width: "25rem" }} />
+    <div className="inline-display">
+      <div className=" poke-img">
+        {imageUrl && <Ribbon text={pokemon.name}></Ribbon>}
+        <div className="card centralised-card">
+          <LazyImage src={imageUrl} alt="img" style={{ width: "25rem" }} />
+        </div>
       </div>
-      <div className="col-md-6 card poke-card" style={{ width: "35rem" }}>
+      <div className=" card poke-card" style={{ width: "35rem" }}>
         <div className="height">
           <h3>HEIGHT</h3>
           <p>{pokemon.height}</p>

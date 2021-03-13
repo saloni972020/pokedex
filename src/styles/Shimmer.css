@@ -1,0 +1,76 @@
+.shine {
+  background: #f6f7f8;
+  background-image: linear-gradient(
+    to right,
+    #f6f7f8 0%,
+    #edeef1 20%,
+    #f6f7f8 40%,
+    #f6f7f8 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 800px 104px;
+  display: inline-block;
+  position: relative;
+
+  -webkit-animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-name: placeholderShimmer;
+  -webkit-animation-timing-function: linear;
+}
+
+.box {
+  height: 220px;
+  width: 100%;
+}
+.shimmerCard {
+  position: relative;
+  -webkit-box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 6px;
+
+  width: 240px;
+  margin: 40px auto;
+}
+.div {
+  display: inline-flex;
+  flex-direction: column;
+
+  margin-top: 15px;
+  vertical-align: top;
+}
+.InlineDiv {
+  display: inline-flex;
+  flex-direction: column;
+
+  margin-top: 15px;
+  vertical-align: top;
+}
+
+.lines {
+  height: 30px;
+
+  margin: 10px 5px;
+}
+
+.photo {
+  display: block !important;
+  width: 240px;
+  height: 220px;
+}
+
+.animate {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(to right, #eff1f3 4%, #e2e2e2 25%, #eff1f3 36%);
+  background-size: 1000px 100%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
