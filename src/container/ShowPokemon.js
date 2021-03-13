@@ -43,126 +43,135 @@ const ShowPokemon = ({
   else if (isErr) return <ErrorPage err={err}></ErrorPage>;
   else
     return (
-      <div className="inline-display">
-        <div className=" poke-img">
-          {imageUrl && (
-            <Ribbon text={pokemon.name} color={pokeCardStyle}></Ribbon>
-          )}
-          <div className="card centralised-card">
-            <LazyImage src={imageUrl} alt="img" style={{ width: "25rem" }} />
-          </div>
-        </div>
-
-        <div class="pokewidget">
-          <div class="pokewidget-types">
-            <div class="pokewidget-type">fire</div>
+      <>
+        <div className="inline-display">
+          <div className=" poke-img">
+            {imageUrl && (
+              <Ribbon text={pokemon.name} color={pokeCardStyle}></Ribbon>
+            )}
+            <div className="card centralised-card">
+              <LazyImage src={imageUrl} alt="img" style={{ width: "25rem" }} />
+            </div>
           </div>
 
-          <div class="pokewidget-characteristics">
-            <div class="pokewidget-characteristic">
+          <div class="pokewidget">
+            <div class="pokewidget-types">
+              <div class="pokewidget-type">fire</div>
+            </div>
+
+            <div class="pokewidget-characteristics">
+              <div class="pokewidget-characteristic">
+                <div
+                  class="pokewidget-characteristic-name"
+                  style={{ color: `${pokeCardStyle}` }}
+                >
+                  height
+                </div>
+                <div class="pokewidget-characteristic-value">
+                  {pokemon.height}
+                </div>
+              </div>
+              <div class="pokewidget-characteristic">
+                <div
+                  class="pokewidget-characteristic-name"
+                  style={{ color: `${pokeCardStyle}` }}
+                >
+                  weight
+                </div>
+                <div class="pokewidget-characteristic-value">
+                  {pokemon.weight}
+                </div>
+              </div>
+              <div class="pokewidget-characteristic">
+                <div
+                  class="pokewidget-characteristic-name"
+                  style={{ color: `${pokeCardStyle}` }}
+                >
+                  Experience
+                </div>
+                <div class="pokewidget-characteristic-value">
+                  {pokemon.base_experience}
+                </div>
+              </div>
+            </div>
+            <div class="pokewidget-description">
               <div
                 class="pokewidget-characteristic-name"
                 style={{ color: `${pokeCardStyle}` }}
               >
-                height
+                abilities
               </div>
               <div class="pokewidget-characteristic-value">
-                {pokemon.height}
+                {pokemon && pokemon.abilities
+                  ? pokemon.abilities.map((ability) => (
+                      <span
+                        className="move label"
+                        style={{ backgroundColor: `${pokeCardStyle}` }}
+                        key={ability.ability.name}
+                      >
+                        {ability.ability.name}
+                      </span>
+                    ))
+                  : "-"}
               </div>
             </div>
-            <div class="pokewidget-characteristic">
-              <div
-                class="pokewidget-characteristic-name"
-                style={{ color: `${pokeCardStyle}` }}
-              >
-                weight
-              </div>
-              <div class="pokewidget-characteristic-value">
-                {pokemon.weight}
-              </div>
-            </div>
-            <div class="pokewidget-characteristic">
-              <div
-                class="pokewidget-characteristic-name"
-                style={{ color: `${pokeCardStyle}` }}
-              >
-                Experience
-              </div>
-              <div class="pokewidget-characteristic-value">
-                {pokemon.base_experience}
-              </div>
-            </div>
-          </div>
-          <div class="pokewidget-description">
-            <div
-              class="pokewidget-characteristic-name"
-              style={{ color: `${pokeCardStyle}` }}
-            >
-              abilities
-            </div>
-            <div class="pokewidget-characteristic-value">
-              {pokemon && pokemon.abilities
-                ? pokemon.abilities.map((ability) => (
-                    <span
-                      className="move label"
-                      style={{ backgroundColor: `${pokeCardStyle}` }}
-                      key={ability.ability.name}
-                    >
-                      {ability.ability.name}
-                    </span>
-                  ))
-                : "-"}
-            </div>
-          </div>
 
-          <div class="pokewidget-stat-container">
-            <div class="pokewidget-stat-values">
-              {pokemon && pokemon.stats
-                ? pokemon.stats.map((stat) => (
-                    <div
-                      class="pokewidget-stat-value"
-                      style={{
-                        height: `${stat.base_stat}%`,
-                        backgroundColor: `${pokeCardStyle}`,
-                      }}
-                    ></div>
-                  ))
-                : null}
-            </div>
-            <div class="pokewidget-stat-names">
-              {pokemon && pokemon.stats
-                ? pokemon.stats.map((stat) => (
-                    <div class="pokewidget-stat-name">{stat.stat.name}</div>
-                  ))
-                : null}
+            <div class="pokewidget-stat-container">
+              <div class="pokewidget-stat-values">
+                {pokemon && pokemon.stats
+                  ? pokemon.stats.map((stat) => (
+                      <div
+                        class="pokewidget-stat-value"
+                        style={{
+                          height: `${stat.base_stat}%`,
+                          backgroundColor: `${pokeCardStyle}`,
+                        }}
+                      ></div>
+                    ))
+                  : null}
+              </div>
+              <div class="pokewidget-stat-names">
+                {pokemon && pokemon.stats
+                  ? pokemon.stats.map((stat) => (
+                      <div class="pokewidget-stat-name">{stat.stat.name}</div>
+                    ))
+                  : null}
+              </div>
             </div>
           </div>
-        </div>
-        {pokemon.moves && pokemon.moves.length !== 0 && (
-          <div className="moves details-card card">
+          <div
+            className="moves details-card card"
+            style={{ minWidth: "200px" }}
+          >
             <div
               className="detail-header"
               style={{ color: `${pokeCardStyle}` }}
             >
               MOVES
             </div>
-            <div className="list-moves">
-              {pokemon.moves.map((move) => (
-                <span
-                  className="move label"
-                  style={{ backgroundColor: `${pokeCardStyle}` }}
-                  key={move.move.name}
-                >
-                  {move.move.name}
-                </span>
-              ))}
-            </div>
+            {pokemon.moves && pokemon.moves.length !== 0 ? (
+              <div className="list-moves">
+                {pokemon.moves.map((move) => (
+                  <span
+                    className="move label"
+                    style={{ backgroundColor: `${pokeCardStyle}` }}
+                    key={move.move.name}
+                  >
+                    {move.move.name}
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <div className="list-moves" style={{ color: `${pokeCardStyle}` }}>
+                No Moves To Display
+              </div>
+            )}
           </div>
-        )}
+        </div>
         <Link to="/" className="text-center">
           <button type="button">Back to list</button>
         </Link>
-      </div>
+      </>
     );
 };
 
