@@ -11,7 +11,7 @@
 @media (max-width: 576px) {
   .wrapper-sm,
   .wrapper {
-    max-width: 540px;
+    max-width: -webkit-fill-available;
   }
   .poke-img {
     width: 100%;
@@ -24,9 +24,14 @@
     width: 100%;
   }
   .pokewidget {
-    max-width: 500px;
+    width: 540px;
     flex-wrap: wrap;
     overflow: hidden;
+    margin: 5px 10px;
+  }
+  .inlineDisplay {
+    justify-content: center;
+    align-items: center;
   }
   .pokewidget-stat-name {
     font-size: 10px;

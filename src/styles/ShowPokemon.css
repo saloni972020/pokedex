@@ -123,6 +123,7 @@ button {
 
 .pokewidget-stat-container {
   margin-top: 10px;
+  overflow: hidden;
 }
 
 .pokewidget-stat-values,
@@ -130,7 +131,6 @@ button {
   position: relative;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: space-between;
 }
 
